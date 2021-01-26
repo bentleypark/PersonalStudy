@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion Config.compileSdkVersion
+    buildToolsVersion Config.buildToolVersion
+
+    defaultConfig {
+        applicationId "com.bentley.personalstudy"
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    lintOptions {
+        abortOnError false
+        disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
+    }
+}
+
+dependencies {
+
+    implementation Libs.coreKtx
+    implementation Libs.appcompat
+    implementation Libs.material
+    implementation Libs.constraintlayout
+    implementation Libs.recyclerview
+    implementation Libs.liveData
+    implementation Libs.viewModel
+
+    implementation Libs.startUp
+    implementation Libs.navUi
+    implementation Libs.navUiKtx
+    implementation Libs.navFragment
+    implementation Libs.navFragmentKtx
+
+    implementation Libs.hiltAndroid
+    implementation Libs.hiltViewModel
+    annotationProcessor Libs.hiltAndroidCompiler
+    annotationProcessor Libs.hiltCompiler
+
+    implementation Libs.rxJava
+    implementation Libs.rxAndroid
+    implementation Libs.rxjavaAdapter
+
+    implementation Libs.retrofit
+    implementation Libs.gson
+    implementation Libs.gsonConverter
+    implementation Libs.okhttp
+    implementation Libs.loggingInterceptor
+
+    implementation Libs.coil
+
+    implementation Libs.timber
+
+    testImplementation Libs.junit4
+    androidTestImplementation Libs.junitExt
+    androidTestImplementation Libs.espressoCore
+}
