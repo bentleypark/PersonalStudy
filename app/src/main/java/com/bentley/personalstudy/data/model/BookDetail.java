@@ -2,6 +2,8 @@ package com.bentley.personalstudy.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class BookDetail {
     @SerializedName("title")
     String title;
@@ -17,7 +19,7 @@ public class BookDetail {
     String isbn10;
     @SerializedName("isbn13")
     String isbn13;
-    @SerializedName("page")
+    @SerializedName("pages")
     int page;
     @SerializedName("year")
     int year;
@@ -27,6 +29,8 @@ public class BookDetail {
     String desc;
     @SerializedName("price")
     String price;
+    @SerializedName("url")
+    String url;
     @SerializedName("image")
     String image;
     @SerializedName("pdf")
@@ -35,6 +39,10 @@ public class BookDetail {
     class PDF {
         @SerializedName("Free eBook")
         String ebook;
+
+        public PDF(String ebook){
+            this.ebook = ebook;
+        }
 
         public String getEbook() {
             return ebook;
@@ -69,20 +77,20 @@ public class BookDetail {
         return isbn13;
     }
 
-    public int getPage() {
-        return page;
+    public String getPage() {
+        return Integer.toString(page);
     }
 
-    public int getYear() {
-        return year;
+    public String getYear() {
+        return Integer.toString(year);
     }
 
     public String getDesc() {
         return desc;
     }
 
-    public int getRating() {
-        return rating;
+    public String getRating() {
+        return Integer.toString(rating);
     }
 
     public String getPrice() {
@@ -93,12 +101,16 @@ public class BookDetail {
         return image;
     }
 
-    public PDF getPdf() {
-        return pdf;
+    public String getUrl() {
+        return url;
+    }
+
+    public String getPdf() {
+        return pdf.getEbook();
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "BookDetail{" +
                 "title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +

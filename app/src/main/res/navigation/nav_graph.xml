@@ -33,5 +33,10 @@
         android:id="@+id/detailFragment"
         android:name="com.bentley.personalstudy.presentation.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <action
+            android:id="@+id/action_detailFragment_to_newFragment"
+            app:destination="@id/newFragment"
+            app:launchSingleTop="true" />
+    </fragment>
 </navigation>

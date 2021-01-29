@@ -68,6 +68,6 @@ public class SharedViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        disposable.dispose();
+//        disposable.dispose();
     }
 }

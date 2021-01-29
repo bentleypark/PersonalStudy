@@ -1,14 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.detail.DetailFragment">
+    android:overScrollMode="never"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_book_placeholder"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:maxLines="2"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/iv_image"
+            tools:text="title" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="subtitle" />
+
+        <TextView
+            android:id="@+id/tv_author_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Author:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_subtitle"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_subtitle" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_author_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_author_title"
+            tools:text="author" />
+
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_author"
+            ads:layout_constraintTop_toTopOf="@+id/tv_author"
+            tools:text="2020" />
+
+        <TextView
+            android:id="@+id/tv_publisher_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Publisher: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_author_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_author_title" />
+
+        <TextView
+            android:id="@+id/tv_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_publisher_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_publisher_title"
+            tools:text="출판사" />
+
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_publisher_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_publisher_title"
+            tools:text="정가" />
+
+        <TextView
+            android:id="@+id/tv_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_price"
+            ads:layout_constraintTop_toTopOf="@+id/tv_price"
+            tools:text="english" />
+
+        <TextView
+            android:id="@+id/tv_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_lang"
+            ads:layout_constraintTop_toTopOf="@+id/tv_lang"
+            tools:text="300p" />
+
+        <TextView
+            android:id="@+id/tv_isbn10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_price"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_price"
+            tools:text="isbn10" />
+
+        <TextView
+            android:id="@+id/tv_isbn13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_isbn10"
+            ads:layout_constraintTop_toTopOf="@+id/tv_isbn10"
+            tools:text="isbn13" />
+
+
+        <TextView
+            android:id="@+id/tv_rating_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Rating:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_isbn10"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_isbn10" />
+
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_rating_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_rating_title"
+            tools:text="rating" />
+
+        <TextView
+            android:id="@+id/tv_url_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="WebSite:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_rating_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_rating_title" />
+
+        <TextView
+            android:id="@+id/tv_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:paddingHorizontal="8dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_url_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_url_title"
+            tools:text="url" />
+
+        <TextView
+            android:id="@+id/tv_pdf_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Free PDF:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_url"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_url" />
+
+        <TextView
+            android:id="@+id/tv_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:paddingHorizontal="8dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_pdf_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_pdf_title"
+            tools:text="pdf" />
+
+
+        <TextView
+            android:id="@+id/tv_contents"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="15sp"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="@+id/tv_pdf"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_pdf"
+            tools:text="내용" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular"
+            style="?android:progressBarStyleLarge"
+            android:layout_width="@dimen/progressbar_size"
+            android:layout_height="@dimen/progressbar_size"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+
+
