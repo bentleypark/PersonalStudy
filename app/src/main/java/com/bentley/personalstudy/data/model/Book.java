@@ -10,7 +10,7 @@ public class Book {
     @SerializedName("subtitle")
     private String subtitle;
     @SerializedName("isbn13")
-    private String isbn13;
+    private String isbn;
     @SerializedName("price")
     private String price;
     @SerializedName("image")
@@ -26,8 +26,8 @@ public class Book {
         return subtitle;
     }
 
-    public String getIsbn13() {
-        return isbn13;
+    public String getIsbn() {
+        return isbn;
     }
 
     public String getPrice() {
@@ -47,17 +47,17 @@ public class Book {
         return "Book{" +
                 "title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +
-                ", isbn13='" + isbn13 + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", price='" + price + '\'' +
                 ", image='" + image + '\'' +
                 ", url='" + url + '\'' +
                 '}';
     }
 
-    public Book(String title, String subtitle, String isbn13, String price, String image, String url) {
+    public Book(String title, String subtitle, String isbn, String price, String image, String url) {
         this.title = title;
         this.subtitle = subtitle;
-        this.isbn13 = isbn13;
+        this.isbn = isbn;
         this.price = price;
         this.image = image;
         this.url = url;

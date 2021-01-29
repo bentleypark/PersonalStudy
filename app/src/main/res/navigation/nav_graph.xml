@@ -20,4 +20,9 @@
         android:name="com.bentley.personalstudy.presentation.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.bentley.personalstudy.presentation.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

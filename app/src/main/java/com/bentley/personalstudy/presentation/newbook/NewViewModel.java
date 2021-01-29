@@ -22,11 +22,11 @@ public class NewViewModel extends ViewModel {
     private BookRepositoryImpl bookRepository;
     private Disposable disposable;
 
-    private MutableLiveData<List<Book>> _newBookList;
-    public LiveData<List<Book>> newBookList;
+    public MutableLiveData<List<Book>> newBookList;
 
     public NewViewModel() {
         bookRepository = new BookRepositoryImpl();
+        newBookList = new MutableLiveData<>();
     }
 
     public void fetchNewBookList() {
@@ -37,14 +37,13 @@ public class NewViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull List<Book> books) {
                         Timber.d(books.toString());
+                        newBookList.setValue(books);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Timber.e(e);
                     }
                 });
-
     }
-
 }

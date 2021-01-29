@@ -2,6 +2,7 @@ package com.bentley.personalstudy.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
@@ -32,27 +33,29 @@ public class MainActivity extends AppCompatActivity {
         binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+
                 switch (tab.getPosition()) {
                     case FRAGMENT_NEW_INDEX: {
-                        navController.navigate(R.id.newFragment);
+                        navController.navigate(R.id.newFragment, null, new NavOptions.Builder().setPopUpTo(R.id.newFragment, true).setLaunchSingleTop(true).build());
+                        break;
                     }
                     case FRAGMENT_BOOKMARK_INDEX: {
-                        navController.navigate(R.id.bookMarkFragment);
+                        navController.navigate(R.id.bookMarkFragment, null, new NavOptions.Builder().setPopUpTo(R.id.bookMarkFragment, true).setLaunchSingleTop(true).build());
+                        break;
                     }
                     case FRAGMENT_HISTORY_INDEX: {
-                        navController.navigate(R.id.historyFragment);
+                        navController.navigate(R.id.historyFragment, null, new NavOptions.Builder().setPopUpTo(R.id.historyFragment, true).setLaunchSingleTop(true).build());
+                        break;
                     }
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }
