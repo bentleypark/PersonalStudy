@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -54,11 +53,6 @@ dependencies {
     implementation Libs.navFragment
     implementation Libs.navFragmentKtx
 
-    implementation Libs.hiltAndroid
-    implementation Libs.hiltViewModel
-    annotationProcessor Libs.hiltAndroidCompiler
-    annotationProcessor Libs.hiltCompiler
-
     implementation Libs.rxJava
     implementation Libs.rxAndroid
     implementation Libs.rxjavaAdapter
@@ -72,6 +66,10 @@ dependencies {
     implementation Libs.coil
 
     implementation Libs.timber
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt

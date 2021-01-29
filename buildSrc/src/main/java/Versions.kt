@@ -52,7 +52,7 @@ object Versions {
     const val klintVersion = "0.40.0"
 
     // Hilt
-    const val hiltVersion = "2.30.1-alpha"
+    const val hiltVersion = "2.31.2-alpha"
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Coil
