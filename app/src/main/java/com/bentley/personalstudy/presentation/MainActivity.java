@@ -5,7 +5,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.bentley.personalstudy.R;
 import com.bentley.personalstudy.databinding.ActivityMainBinding;
@@ -28,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
+                switch (tab.getPosition()) {
                     case FRAGMENT_NEW_INDEX: {
                         navController.navigate(R.id.newFragment);
                     }
