@@ -28,6 +28,18 @@
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/guideline" />
 
+        <ImageButton
+            android:id="@+id/btn_favorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="12dp"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_favorite_selector"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/iv_image" />
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -71,23 +83,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:textSize="16sp"
-            ads:layout_constraintStart_toEndOf="@+id/tv_author_title"
-            ads:layout_constraintTop_toTopOf="@+id/tv_author_title"
+            ads:layout_constraintStart_toStartOf="@+id/tv_author_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_author_title"
             tools:text="author" />
-
-        <TextView
-            android:id="@+id/tv_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            ads:layout_constraintStart_toEndOf="@+id/tv_author"
-            ads:layout_constraintTop_toTopOf="@+id/tv_author"
-            tools:text="2020" />
 
         <TextView
             android:id="@+id/tv_publisher_title"
@@ -98,8 +98,8 @@
             android:text="Publisher: "
             android:textColor="@color/black"
             android:textSize="16sp"
-            ads:layout_constraintStart_toStartOf="@+id/tv_author_title"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_author_title" />
+            ads:layout_constraintStart_toStartOf="@+id/tv_author"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_author" />
 
         <TextView
             android:id="@+id/tv_publisher"
@@ -244,20 +244,81 @@
             ads:layout_constraintTop_toBottomOf="@+id/tv_pdf_title"
             tools:text="pdf" />
 
+        <TextView
+            android:id="@+id/tv_dec_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Description:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_pdf"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_pdf" />
 
         <TextView
             android:id="@+id/tv_contents"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:textSize="15sp"
-            ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="@+id/tv_pdf"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_pdf"
+            ads:layout_constraintStart_toStartOf="@+id/tv_dec_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_dec_title"
             tools:text="내용" />
+
+        <TextView
+            android:id="@+id/tv_memo_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Memo:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_contents"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_contents" />
+
+        <ImageButton
+            android:id="@+id/btn_memo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="12dp"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_memo_selector"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_contents" />
+
+        <TextView
+            android:id="@+id/tv_memo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="18sp"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="@+id/tv_memo_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_memo_title"
+            tools:text="메모" />
+
+        <EditText
+            android:id="@+id/et_memo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:hint="please add your note here."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="@+id/tv_memo_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_memo_title" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress_circular"

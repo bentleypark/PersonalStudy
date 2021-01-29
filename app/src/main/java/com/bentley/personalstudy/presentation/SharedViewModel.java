@@ -7,6 +7,8 @@ import com.bentley.personalstudy.data.model.Book;
 import com.bentley.personalstudy.data.model.BookDetail;
 import com.bentley.personalstudy.data.repository.BookRepositoryImpl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,11 +24,15 @@ public class SharedViewModel extends ViewModel {
 
     public MutableLiveData<List<Book>> newBookList;
     public MutableLiveData<BookDetail> bookDetail;
+    public List<String> favoriteList;
+    public HashMap<String, String> memoList;
 
     public SharedViewModel() {
         bookRepository = new BookRepositoryImpl();
         newBookList = new MutableLiveData<>();
         bookDetail = new MutableLiveData<>();
+        favoriteList = new ArrayList<>();
+        memoList = new HashMap<>();
     }
 
     public void fetchNewBookList() {
@@ -65,9 +71,29 @@ public class SharedViewModel extends ViewModel {
                 });
     }
 
+    public void addFavoriteList(String isbn) {
+        favoriteList.add(isbn);
+    }
+
+    public void removeFavoriteList(String isbn) {
+        favoriteList.remove(isbn);
+    }
+
+    public boolean checkFavoriteList(String isbn) {
+        return favoriteList.contains(isbn);
+    }
+
+    public void addMemoList(String isbn, String text) {
+        memoList.put(isbn, text);
+    }
+
+    public String fetchMemo(String isbn) {
+        return memoList.get(isbn);
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
-//        disposable.dispose();
+        disposable.dispose();
     }
 }

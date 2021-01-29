@@ -15,8 +15,10 @@
         android:theme="@style/Theme.PersonalStudy">
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+                    android:windowSoftInputMode="adjustResize" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

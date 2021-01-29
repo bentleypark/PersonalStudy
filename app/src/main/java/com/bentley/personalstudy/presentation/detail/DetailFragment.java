@@ -1,5 +1,6 @@
 package com.bentley.personalstudy.presentation.detail;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -14,6 +15,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.bentley.personalstudy.R;
 import com.bentley.personalstudy.data.model.BookDetail;
@@ -71,11 +73,10 @@ public class DetailFragment extends Fragment {
     private void bindViews(BookDetail detail) {
         binding.progressCircular.setVisibility(View.GONE);
 
-        binding.tvTitle.setText(detail.getTitle());
+        binding.tvTitle.setText(detail.getTitle() + "  (" + detail.getYear() + ")");
         binding.tvSubtitle.setText(detail.getSubtitle());
         binding.tvAuthor.setText(detail.getAuthors());
         binding.tvPublisher.setText(detail.getPublisher());
-        binding.tvYear.setText("(" + detail.getYear() + ")");
         binding.tvPrice.setText(detail.getPrice());
         binding.tvLang.setText(detail.getLanguage());
         binding.tvPage.setText(detail.getPage() + "p");
@@ -97,5 +98,39 @@ public class DetailFragment extends Fragment {
                 .target(binding.ivImage)
                 .build();
         imageLoader.enqueue(request);
+
+        binding.btnFavorite.setSelected(mViewModel.checkFavoriteList(detail.getIsbn13()));
+        binding.btnFavorite.setOnClickListener(v -> {
+            binding.btnFavorite.setSelected(!binding.btnFavorite.isSelected());
+            if (binding.btnFavorite.isSelected()) {
+                mViewModel.addFavoriteList(detail.getIsbn13());
+            } else {
+                mViewModel.removeFavoriteList(detail.getIsbn13());
+            }
+        });
+
+        String memo = mViewModel.fetchMemo(detail.getIsbn13());
+        if (memo != null) {
+            binding.tvMemo.setText(memo);
+        }
+
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        binding.btnMemo.setOnClickListener(v -> {
+            binding.btnMemo.setSelected(!binding.btnMemo.isSelected());
+            if (binding.btnMemo.isSelected()) {
+                binding.tvMemo.setVisibility(View.GONE);
+                binding.etMemo.setVisibility(View.VISIBLE);
+                binding.etMemo.requestFocus();
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+            } else {
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                binding.etMemo.clearFocus();
+                String newMemo = String.valueOf(binding.etMemo.getText());
+                mViewModel.addMemoList(detail.getIsbn13(), newMemo);
+                binding.tvMemo.setText(newMemo);
+                binding.tvMemo.setVisibility(View.VISIBLE);
+                binding.etMemo.setVisibility(View.GONE);
+            }
+        });
     }
 }
