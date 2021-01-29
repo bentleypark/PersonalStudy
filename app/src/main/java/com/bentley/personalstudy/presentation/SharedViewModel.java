@@ -9,7 +9,6 @@ import com.bentley.personalstudy.data.repository.BookRepositoryImpl;
 
 import java.util.List;
 
-import coil.request.Disposable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -19,7 +18,7 @@ import timber.log.Timber;
 public class SharedViewModel extends ViewModel {
 
     private BookRepositoryImpl bookRepository;
-    private Disposable disposable;
+    private DisposableSingleObserver disposable;
 
     public MutableLiveData<List<Book>> newBookList;
     public MutableLiveData<BookDetail> bookDetail;
@@ -31,7 +30,7 @@ public class SharedViewModel extends ViewModel {
     }
 
     public void fetchNewBookList() {
-        bookRepository.fetchNewBookList()
+        disposable = bookRepository.fetchNewBookList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<List<Book>>() {
@@ -49,7 +48,7 @@ public class SharedViewModel extends ViewModel {
     }
 
     public void fetchBookDetail(String isbn) {
-        bookRepository.fetchBookDetailInfo(isbn)
+        disposable = bookRepository.fetchBookDetailInfo(isbn)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<BookDetail>() {
@@ -64,5 +63,11 @@ public class SharedViewModel extends ViewModel {
                         Timber.e(e);
                     }
                 });
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposable.dispose();
     }
 }
