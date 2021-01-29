@@ -24,7 +24,8 @@ public class SharedViewModel extends ViewModel {
 
     public MutableLiveData<List<Book>> newBookList;
     public MutableLiveData<BookDetail> bookDetail;
-    public List<String> favoriteList;
+    public List<BookDetail> favoriteList;
+    public List<Book> historyList;
     public HashMap<String, String> memoList;
 
     public SharedViewModel() {
@@ -33,6 +34,7 @@ public class SharedViewModel extends ViewModel {
         bookDetail = new MutableLiveData<>();
         favoriteList = new ArrayList<>();
         memoList = new HashMap<>();
+        historyList = new ArrayList<>();
     }
 
     public void fetchNewBookList() {
@@ -71,16 +73,23 @@ public class SharedViewModel extends ViewModel {
                 });
     }
 
-    public void addFavoriteList(String isbn) {
-        favoriteList.add(isbn);
+    public void addFavoriteList(BookDetail item) {
+        favoriteList.add(item);
     }
 
-    public void removeFavoriteList(String isbn) {
-        favoriteList.remove(isbn);
+    public void removeFavoriteList(BookDetail item) {
+        favoriteList.remove(item);
     }
 
-    public boolean checkFavoriteList(String isbn) {
-        return favoriteList.contains(isbn);
+    public boolean checkFavoriteList(BookDetail item) {
+        boolean result = false;
+        for (BookDetail detail : favoriteList) {
+            if (detail.getTitle().equals(item.getTitle())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     public void addMemoList(String isbn, String text) {
@@ -89,6 +98,31 @@ public class SharedViewModel extends ViewModel {
 
     public String fetchMemo(String isbn) {
         return memoList.get(isbn);
+    }
+
+    public void addHistoryList(Book item) {
+        if (!checkHistoryList(item)) {
+            historyList.add(item);
+        }
+    }
+
+    public void removeHistoryList(Book item) {
+        historyList.remove(item);
+    }
+
+    public List<Book> fetchHistoryList() {
+        return historyList;
+    }
+
+    public boolean checkHistoryList(Book item) {
+        boolean result = false;
+        for (Book detail : historyList) {
+            if (detail.getTitle().equals(item.getTitle())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override

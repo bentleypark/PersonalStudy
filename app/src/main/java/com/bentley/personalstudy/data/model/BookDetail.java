@@ -78,11 +78,11 @@ public class BookDetail {
     }
 
     public String getPage() {
-        return Integer.toString(page);
+        return String.valueOf(page);
     }
 
     public String getYear() {
-        return Integer.toString(year);
+        return String.valueOf(year);
     }
 
     public String getDesc() {
@@ -90,7 +90,7 @@ public class BookDetail {
     }
 
     public String getRating() {
-        return Integer.toString(rating);
+        return String.valueOf(rating);
     }
 
     public String getPrice() {

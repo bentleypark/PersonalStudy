@@ -56,7 +56,7 @@ public class NewFragment extends Fragment {
     }
 
     private void setupViews() {
-        newBookListAdapter = new NewBookListAdapter(books);
+        newBookListAdapter = new NewBookListAdapter(books, mViewModel);
 
         binding.bookList.setAdapter(newBookListAdapter);
         binding.bookList.setHasFixedSize(true);

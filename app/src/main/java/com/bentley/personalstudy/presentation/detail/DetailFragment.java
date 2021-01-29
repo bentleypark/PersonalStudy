@@ -71,7 +71,6 @@ public class DetailFragment extends Fragment {
     }
 
     private void bindViews(BookDetail detail) {
-        binding.progressCircular.setVisibility(View.GONE);
 
         binding.tvTitle.setText(detail.getTitle() + "  (" + detail.getYear() + ")");
         binding.tvSubtitle.setText(detail.getSubtitle());
@@ -82,11 +81,13 @@ public class DetailFragment extends Fragment {
         binding.tvPage.setText(detail.getPage() + "p");
         binding.tvIsbn10.setText(detail.getIsbn10());
         binding.tvIsbn13.setText(detail.getIsbn13());
+
         if (!detail.getRating().equals("0")) {
             binding.tvRating.setText(detail.getRating());
         } else {
             binding.tvRating.setText("No Rating");
         }
+
         binding.tvUrl.setText(Html.fromHtml(detail.getUrl()));
         binding.tvPdf.setText(Html.fromHtml(detail.getPdf()));
         binding.tvContents.setText(detail.getDesc());
@@ -99,13 +100,13 @@ public class DetailFragment extends Fragment {
                 .build();
         imageLoader.enqueue(request);
 
-        binding.btnFavorite.setSelected(mViewModel.checkFavoriteList(detail.getIsbn13()));
+        binding.btnFavorite.setSelected(mViewModel.checkFavoriteList(detail));
         binding.btnFavorite.setOnClickListener(v -> {
             binding.btnFavorite.setSelected(!binding.btnFavorite.isSelected());
             if (binding.btnFavorite.isSelected()) {
-                mViewModel.addFavoriteList(detail.getIsbn13());
+                mViewModel.addFavoriteList(detail);
             } else {
-                mViewModel.removeFavoriteList(detail.getIsbn13());
+                mViewModel.removeFavoriteList(detail);
             }
         });
 
@@ -114,16 +115,15 @@ public class DetailFragment extends Fragment {
             binding.tvMemo.setText(memo);
         }
 
-        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         binding.btnMemo.setOnClickListener(v -> {
             binding.btnMemo.setSelected(!binding.btnMemo.isSelected());
             if (binding.btnMemo.isSelected()) {
                 binding.tvMemo.setVisibility(View.GONE);
                 binding.etMemo.setVisibility(View.VISIBLE);
                 binding.etMemo.requestFocus();
-                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+                showKeyboard();
             } else {
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                hideKeyboard();
                 binding.etMemo.clearFocus();
                 String newMemo = String.valueOf(binding.etMemo.getText());
                 mViewModel.addMemoList(detail.getIsbn13(), newMemo);
@@ -132,5 +132,17 @@ public class DetailFragment extends Fragment {
                 binding.etMemo.setVisibility(View.GONE);
             }
         });
+
+        binding.progressCircular.setVisibility(View.GONE);
+    }
+
+    private void showKeyboard() {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 }

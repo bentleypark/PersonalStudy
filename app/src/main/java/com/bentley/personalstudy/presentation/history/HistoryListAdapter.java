@@ -1,14 +1,13 @@
-package com.bentley.personalstudy.presentation.newbook;
+package com.bentley.personalstudy.presentation.history;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bentley.personalstudy.data.model.Book;
-import com.bentley.personalstudy.databinding.ItemBookBinding;
+import com.bentley.personalstudy.databinding.ItemEditableBookBinding;
 import com.bentley.personalstudy.presentation.SharedViewModel;
 
 import java.util.List;
@@ -17,28 +16,29 @@ import coil.Coil;
 import coil.ImageLoader;
 import coil.request.ImageRequest;
 
-public class NewBookListAdapter extends RecyclerView.Adapter<NewBookListAdapter.NewBookListViewHolder> {
-
+public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.HistoryListViewHolder> {
     private List<Book> books;
-    private ItemBookBinding binding;
+    private ItemEditableBookBinding binding;
+    private ItemChangedListener itemChangedListener;
     private SharedViewModel sharedViewModel;
 
-    public NewBookListAdapter(List<Book> list, SharedViewModel viewModel) {
+    public HistoryListAdapter(List<Book> list, ItemChangedListener listener, SharedViewModel viewModel) {
         books = list;
+        itemChangedListener = listener;
         sharedViewModel = viewModel;
     }
 
     @NonNull
     @Override
-    public NewBookListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HistoryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        binding = ItemBookBinding.inflate(layoutInflater);
+        binding = ItemEditableBookBinding.inflate(layoutInflater);
 
-        return new NewBookListViewHolder(binding);
+        return new HistoryListViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewBookListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HistoryListViewHolder holder, int position) {
         Book item = books.get(position);
         holder.bind(item);
     }
@@ -48,16 +48,17 @@ public class NewBookListAdapter extends RecyclerView.Adapter<NewBookListAdapter.
         return books.size();
     }
 
-    void addAll(List<Book> newList) {
-        books.clear();
-        books.addAll(newList);
-        notifyDataSetChanged();
+    void remove(Book item) {
+        int index = books.indexOf(item);
+        books.remove(item);
+        notifyItemRemoved(index);
+        itemChangedListener.updateItemCount(getItemCount());
     }
 
-    class NewBookListViewHolder extends RecyclerView.ViewHolder {
-        private final ItemBookBinding binding;
+    class HistoryListViewHolder extends RecyclerView.ViewHolder {
+        private final ItemEditableBookBinding binding;
 
-        public NewBookListViewHolder(@NonNull ItemBookBinding view) {
+        public HistoryListViewHolder(ItemEditableBookBinding view) {
             super(view.getRoot());
             binding = view;
         }
@@ -77,10 +78,14 @@ public class NewBookListAdapter extends RecyclerView.Adapter<NewBookListAdapter.
                     .build();
             imageLoader.enqueue(request);
 
-            binding.bookItem.setOnClickListener(v -> {
-                sharedViewModel.addHistoryList(item);
-                Navigation.findNavController(v).navigate(NewFragmentDirections.Companion.actionNewFragmentToDetailFragment(item.getIsbn()));
+            binding.btnDelete.setOnClickListener(v -> {
+                remove(item);
+                sharedViewModel.removeHistoryList(item);
             });
         }
+    }
+
+    interface ItemChangedListener {
+        void updateItemCount(int count);
     }
 }
