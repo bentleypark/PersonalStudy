@@ -9,7 +9,16 @@
         android:id="@+id/newFragment"
         android:name="com.bentley.personalstudy.presentation.newbook.NewFragment"
         android:label="fragment_new"
-        tools:layout="@layout/fragment_new" />
+        tools:layout="@layout/fragment_new">
+        <action
+            android:id="@+id/action_newFragment_to_detailFragment"
+            app:destination="@id/detailFragment">
+            <argument
+                android:name="isbn"
+                android:defaultValue=""
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/bookMarkFragment"
         android:name="com.bentley.personalstudy.presentation.bookmark.BookMarkFragment"

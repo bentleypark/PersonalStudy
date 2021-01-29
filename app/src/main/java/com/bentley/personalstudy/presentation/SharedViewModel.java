@@ -1,11 +1,10 @@
-package com.bentley.personalstudy.presentation.newbook;
+package com.bentley.personalstudy.presentation;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.bentley.personalstudy.data.model.Book;
-import com.bentley.personalstudy.data.model.NewBookRequestResult;
+import com.bentley.personalstudy.data.model.BookDetail;
 import com.bentley.personalstudy.data.repository.BookRepositoryImpl;
 
 import java.util.List;
@@ -17,16 +16,18 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class NewViewModel extends ViewModel {
+public class SharedViewModel extends ViewModel {
 
     private BookRepositoryImpl bookRepository;
     private Disposable disposable;
 
     public MutableLiveData<List<Book>> newBookList;
+    public MutableLiveData<BookDetail> bookDetail;
 
-    public NewViewModel() {
+    public SharedViewModel() {
         bookRepository = new BookRepositoryImpl();
         newBookList = new MutableLiveData<>();
+        bookDetail = new MutableLiveData<>();
     }
 
     public void fetchNewBookList() {
@@ -38,6 +39,24 @@ public class NewViewModel extends ViewModel {
                     public void onSuccess(@NonNull List<Book> books) {
                         Timber.d(books.toString());
                         newBookList.setValue(books);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Timber.e(e);
+                    }
+                });
+    }
+
+    public void fetchBookDetail(String isbn) {
+        bookRepository.fetchBookDetailInfo(isbn)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<BookDetail>() {
+                    @Override
+                    public void onSuccess(@NonNull BookDetail detail) {
+                        Timber.d(detail.toString());
+                        bookDetail.setValue(detail);
                     }
 
                     @Override

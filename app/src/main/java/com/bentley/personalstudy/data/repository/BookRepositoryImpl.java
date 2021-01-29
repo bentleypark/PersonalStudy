@@ -2,6 +2,7 @@ package com.bentley.personalstudy.data.repository;
 
 import com.bentley.personalstudy.data.api.ApiManager;
 import com.bentley.personalstudy.data.model.Book;
+import com.bentley.personalstudy.data.model.BookDetail;
 import com.bentley.personalstudy.data.model.NewBookRequestResult;
 
 import java.util.List;
@@ -17,5 +18,12 @@ public class BookRepositoryImpl implements BookRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(NewBookRequestResult::getBooks);
+    }
+
+    @Override
+    public Single<BookDetail> fetchBookDetailInfo(String isbn) {
+        return ApiManager.getInstance().getService().fetccBookDetailInfo(isbn)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

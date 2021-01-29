@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bentley.personalstudy.R;
 import com.bentley.personalstudy.data.model.Book;
 import com.bentley.personalstudy.databinding.ItemBookBinding;
 
@@ -76,7 +75,7 @@ public class NewBookListAdapter extends RecyclerView.Adapter<NewBookListAdapter.
             imageLoader.enqueue(request);
 
             binding.bookItem.setOnClickListener(v -> {
-                Navigation.findNavController(v).navigate(R.id.detailFragment);
+                Navigation.findNavController(v).navigate(NewFragmentDirections.Companion.actionNewFragmentToDetailFragment(item.getIsbn()));
             });
         }
     }

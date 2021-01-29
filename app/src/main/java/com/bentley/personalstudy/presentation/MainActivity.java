@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (tab.getPosition()) {
                     case FRAGMENT_NEW_INDEX: {
-                        navController.navigate(R.id.newFragment, null, new NavOptions.Builder().setPopUpTo(R.id.newFragment, true).setLaunchSingleTop(true).build());
+                        navController.navigate(R.id.newFragment, null, new NavOptions.Builder().setLaunchSingleTop(true).build());
                         break;
                     }
                     case FRAGMENT_BOOKMARK_INDEX: {
-                        navController.navigate(R.id.bookMarkFragment, null, new NavOptions.Builder().setPopUpTo(R.id.bookMarkFragment, true).setLaunchSingleTop(true).build());
+                        navController.navigate(R.id.bookMarkFragment, null, new NavOptions.Builder().setLaunchSingleTop(true).build());
                         break;
                     }
                     case FRAGMENT_HISTORY_INDEX: {

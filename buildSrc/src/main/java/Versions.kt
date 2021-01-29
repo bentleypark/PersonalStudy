@@ -2,7 +2,6 @@ object Versions {
 
     // Class Path for Plugin
     const val buildGradleVersion = "4.1.2"
-    const val detektGradleVersion = "1.15.0"
     const val navSafArgPluginVersion = "2.3.2"
 
     // Kotlin
@@ -28,7 +27,7 @@ object Versions {
 
     // Jetpack
     const val lifeCycleVersion = "2.2.0"
-    const val navigationVersion = "2.3.2"
+    const val navigationVersion = "2.3.3"
     const val startupVersion = "1.0.0"
 
     const val testVersion = "1.3.0"
