@@ -10,19 +10,21 @@ import com.bentley.personalstudy.data.model.Book;
 import com.bentley.personalstudy.databinding.ItemEditableBookBinding;
 import com.bentley.personalstudy.presentation.SharedViewModel;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import coil.Coil;
 import coil.ImageLoader;
 import coil.request.ImageRequest;
 
-public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.HistoryListViewHolder> {
+public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapter.HistoryListViewHolder> {
     private List<Book> books;
     private ItemEditableBookBinding binding;
     private ItemChangedListener itemChangedListener;
     private SharedViewModel sharedViewModel;
 
-    public HistoryListAdapter(List<Book> list, ItemChangedListener listener, SharedViewModel viewModel) {
+    public EditableListAdapter(List<Book> list, ItemChangedListener listener, SharedViewModel viewModel) {
         books = list;
         itemChangedListener = listener;
         sharedViewModel = viewModel;
@@ -55,6 +57,31 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         itemChangedListener.updateItemCount(getItemCount());
     }
 
+    public void sortListBy(String sort) {
+
+        switch (sort) {
+            case "title": {
+                TitleComparator titleComparator = new TitleComparator();
+                Collections.sort(books, titleComparator);
+                break;
+            }
+
+            case "price": {
+                PriceComparator priceComparator = new PriceComparator();
+                Collections.sort(books, priceComparator);
+                break;
+            }
+
+            case "isbn": {
+                IsbnComparator isbnComparator = new IsbnComparator();
+                Collections.sort(books, isbnComparator);
+                break;
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
     class HistoryListViewHolder extends RecyclerView.ViewHolder {
         private final ItemEditableBookBinding binding;
 
@@ -85,7 +112,31 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         }
     }
 
-    interface ItemChangedListener {
+    public interface ItemChangedListener {
         void updateItemCount(int count);
+    }
+
+    class TitleComparator implements Comparator<Book> {
+
+        @Override
+        public int compare(Book o1, Book o2) {
+            return o1.getTitle().compareTo(o2.getTitle());
+        }
+    }
+
+    class PriceComparator implements Comparator<Book> {
+
+        @Override
+        public int compare(Book o1, Book o2) {
+            return o2.getPrice().compareTo(o1.getPrice());
+        }
+    }
+
+    class IsbnComparator implements Comparator<Book> {
+
+        @Override
+        public int compare(Book o1, Book o2) {
+            return o2.getIsbn().compareTo(o1.getIsbn());
+        }
     }
 }

@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import com.bentley.personalstudy.databinding.FragmentHistoryBinding;
 import com.bentley.personalstudy.presentation.SharedViewModel;
 
-public class HistoryFragment extends Fragment implements HistoryListAdapter.ItemChangedListener {
+public class HistoryFragment extends Fragment implements EditableListAdapter.ItemChangedListener {
 
     private SharedViewModel mViewModel;
     private FragmentHistoryBinding binding;
-    private HistoryListAdapter historyListAdapter;
+    private EditableListAdapter historyListAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,7 +48,7 @@ public class HistoryFragment extends Fragment implements HistoryListAdapter.Item
 
     private void setupViews() {
         if (!mViewModel.fetchHistoryList().isEmpty()) {
-            historyListAdapter = new HistoryListAdapter(mViewModel.fetchHistoryList(), this, mViewModel);
+            historyListAdapter = new EditableListAdapter(mViewModel.fetchHistoryList(), this, mViewModel);
             binding.bookList.setVisibility(View.VISIBLE);
             binding.tvEmpty.setVisibility(View.GONE);
         } else {

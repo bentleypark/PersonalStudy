@@ -40,7 +40,7 @@ public class BookDetail {
         @SerializedName("Free eBook")
         String ebook;
 
-        public PDF(String ebook){
+        public PDF(String ebook) {
             this.ebook = ebook;
         }
 
@@ -106,7 +106,11 @@ public class BookDetail {
     }
 
     public String getPdf() {
-        return pdf.getEbook();
+        if (pdf != null) {
+            return pdf.getEbook();
+        } else {
+            return "";
+        }
     }
 
     @Override

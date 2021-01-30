@@ -92,6 +92,17 @@ public class SharedViewModel extends ViewModel {
         return result;
     }
 
+    public List<Book> fetchFavoriteList() {
+        List<Book> bookmarkList = new ArrayList<>();
+
+        if (!favoriteList.isEmpty()) {
+            for (BookDetail detail : favoriteList) {
+                bookmarkList.add(new Book(detail.getTitle(), detail.getSubtitle(), detail.getIsbn13(), detail.getPrice(), detail.getImage(), detail.getUrl()));
+            }
+        }
+        return bookmarkList;
+    }
+
     public void addMemoList(String isbn, String text) {
         memoList.put(isbn, text);
     }
