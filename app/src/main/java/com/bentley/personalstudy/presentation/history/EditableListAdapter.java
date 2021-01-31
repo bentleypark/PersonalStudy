@@ -128,7 +128,8 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
 
         @Override
         public int compare(Book o1, Book o2) {
-            return o2.getPrice().compareTo(o1.getPrice());
+
+            return o2.getPrice().substring(1).compareTo(o1.getPrice().substring(1));
         }
     }
 
