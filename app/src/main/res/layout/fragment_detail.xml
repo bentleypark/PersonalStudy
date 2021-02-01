@@ -45,9 +45,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:maxLines="2"
-            android:paddingEnd="16dp"
+            android:paddingHorizontal="16dp"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:paddingEnd="16dp"
+            android:paddingHorizontal="16dp"
             android:textColor="@color/black"
             android:textSize="20sp"
             ads:layout_constraintStart_toStartOf="@+id/tv_title"
@@ -115,15 +115,39 @@
 
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_price_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
             android:layout_marginTop="16dp"
+            android:text="Price: "
+            android:textColor="@color/black"
             android:textSize="16sp"
             ads:layout_constraintStart_toStartOf="@+id/tv_publisher_title"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_publisher_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_publisher_title" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toEndOf="@+id/tv_price_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_price_title"
             tools:text="정가" />
+
+        <TextView
+            android:id="@+id/tv_lang_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Language: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_price_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_price_title" />
 
         <TextView
             android:id="@+id/tv_lang"
@@ -132,9 +156,21 @@
             android:layout_below="@id/tv_title"
             android:layout_marginStart="16dp"
             android:textSize="16sp"
-            ads:layout_constraintStart_toEndOf="@+id/tv_price"
-            ads:layout_constraintTop_toTopOf="@+id/tv_price"
+            ads:layout_constraintStart_toEndOf="@+id/tv_lang_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_lang_title"
             tools:text="english" />
+
+        <TextView
+            android:id="@+id/tv_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="Total Page: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_lang_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_lang_title" />
 
         <TextView
             android:id="@+id/tv_page"
@@ -143,19 +179,31 @@
             android:layout_below="@id/tv_title"
             android:layout_marginStart="16dp"
             android:textSize="16sp"
-            ads:layout_constraintStart_toEndOf="@+id/tv_lang"
-            ads:layout_constraintTop_toTopOf="@+id/tv_lang"
+            ads:layout_constraintStart_toEndOf="@+id/tv_page_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_page_title"
             tools:text="300p" />
+
+        <TextView
+            android:id="@+id/tv_isbn_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="16dp"
+            android:text="ISBN 10 / ISBN 13: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            ads:layout_constraintStart_toStartOf="@+id/tv_page_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_page_title" />
 
         <TextView
             android:id="@+id/tv_isbn10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="5dp"
             android:textSize="16sp"
-            ads:layout_constraintStart_toStartOf="@+id/tv_price"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_price"
+            ads:layout_constraintStart_toEndOf="@+id/tv_isbn_title"
+            ads:layout_constraintTop_toTopOf="@+id/tv_isbn_title"
             tools:text="isbn10" />
 
         <TextView
@@ -163,7 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="5dp"
             android:textSize="16sp"
             ads:layout_constraintStart_toEndOf="@+id/tv_isbn10"
             ads:layout_constraintTop_toTopOf="@+id/tv_isbn10"
@@ -179,8 +227,8 @@
             android:text="Rating:"
             android:textColor="@color/black"
             android:textSize="16sp"
-            ads:layout_constraintStart_toStartOf="@+id/tv_isbn10"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_isbn10" />
+            ads:layout_constraintStart_toStartOf="@+id/tv_isbn_title"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_isbn_title" />
 
         <TextView
             android:id="@+id/tv_rating"
@@ -330,10 +378,10 @@
             style="?android:progressBarStyleLarge"
             android:layout_width="@dimen/progressbar_size"
             android:layout_height="@dimen/progressbar_size"
-            ads:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toTopOf="parent" />
+            ads:layout_constraintTop_toBottomOf="@+id/iv_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 

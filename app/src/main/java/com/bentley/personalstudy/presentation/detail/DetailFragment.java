@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -58,6 +59,7 @@ public class DetailFragment extends Fragment {
 
     private void setupObserve() {
         mViewModel.bookDetail.observe(getViewLifecycleOwner(), this::bindViews);
+        mViewModel.isLoad.observe(getViewLifecycleOwner(), this::checkIsLoading);
     }
 
     private void setupBackSpace() {
@@ -71,7 +73,6 @@ public class DetailFragment extends Fragment {
     }
 
     private void bindViews(BookDetail detail) {
-
         binding.tvTitle.setText(detail.getTitle() + "  (" + detail.getYear() + ")");
         binding.tvSubtitle.setText(detail.getSubtitle());
         binding.tvAuthor.setText(detail.getAuthors());
@@ -85,11 +86,16 @@ public class DetailFragment extends Fragment {
         if (!detail.getRating().equals("0")) {
             binding.tvRating.setText(detail.getRating());
         } else {
-            binding.tvRating.setText("No Rating");
+            binding.tvRating.setText("No Rating.");
         }
 
         binding.tvUrl.setText(Html.fromHtml(detail.getUrl()));
-        binding.tvPdf.setText(Html.fromHtml(detail.getPdf()));
+
+        if(!detail.getPdf().isEmpty()) {
+            binding.tvPdf.setText(Html.fromHtml(detail.getPdf()));
+        } else {
+            binding.tvPdf.setText(Html.fromHtml("Not Provided."));
+        }
         binding.tvContents.setText(detail.getDesc());
 
         ImageLoader imageLoader = Coil.imageLoader(requireContext());
@@ -132,8 +138,14 @@ public class DetailFragment extends Fragment {
                 binding.etMemo.setVisibility(View.GONE);
             }
         });
+    }
 
-        binding.progressCircular.setVisibility(View.GONE);
+    private void checkIsLoading(Boolean status) {
+        if(status) {
+            binding.progressCircular.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressCircular.setVisibility(View.GONE);
+        }
     }
 
     private void showKeyboard() {

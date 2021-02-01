@@ -27,6 +27,7 @@ public class SharedViewModel extends ViewModel {
     public List<BookDetail> favoriteList;
     public List<Book> historyList;
     public HashMap<String, String> memoList;
+    public MutableLiveData<Boolean> isLoad;
 
     public SharedViewModel() {
         bookRepository = new BookRepositoryImpl();
@@ -35,6 +36,7 @@ public class SharedViewModel extends ViewModel {
         favoriteList = new ArrayList<>();
         memoList = new HashMap<>();
         historyList = new ArrayList<>();
+        isLoad = new MutableLiveData<>();
     }
 
     public void fetchNewBookList() {
@@ -56,6 +58,7 @@ public class SharedViewModel extends ViewModel {
     }
 
     public void fetchBookDetail(String isbn) {
+        isLoad.setValue(true);
         disposable = bookRepository.fetchBookDetailInfo(isbn)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,6 +67,7 @@ public class SharedViewModel extends ViewModel {
                     public void onSuccess(@NonNull BookDetail detail) {
                         Timber.d(detail.toString());
                         bookDetail.setValue(detail);
+                        isLoad.setValue(false);
                     }
 
                     @Override
