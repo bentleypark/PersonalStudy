@@ -59,6 +59,10 @@ public class HistoryFragment extends Fragment implements EditableListAdapter.Ite
         binding.bookList.setHasFixedSize(true);
     }
 
+    private void itemClick() {
+
+    }
+
     @Override
     public void updateItemCount(int count) {
         if (count == 0) {

@@ -21,7 +21,7 @@ public class NewBookListAdapter extends RecyclerView.Adapter<NewBookListAdapter.
 
     private List<Book> books;
     private ItemBookBinding binding;
-    private SharedViewModel sharedViewModel;
+    private final SharedViewModel sharedViewModel;
 
     public NewBookListAdapter(List<Book> list, SharedViewModel viewModel) {
         books = list;

@@ -20,11 +20,14 @@ import coil.Coil;
 import coil.ImageLoader;
 import coil.request.ImageRequest;
 
+/*
+     Bookmark/ History 에서 공통으로 사용하는 Adapter Class
+ */
 public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapter.HistoryListViewHolder> {
     private List<Book> books;
     private ItemEditableBookBinding binding;
-    private ItemChangedListener itemChangedListener;
-    private SharedViewModel sharedViewModel;
+    private final ItemChangedListener itemChangedListener;
+    private final SharedViewModel sharedViewModel;
     private String currentFragment;
 
     public EditableListAdapter(List<Book> list, ItemChangedListener listener, SharedViewModel viewModel, String current) {
@@ -62,7 +65,9 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
     }
 
     public void sortListBy(String sort) {
-
+        /*
+            정렬 기준에 따라서 분기 처리
+        */
         switch (sort) {
             case "title": {
                 TitleComparator titleComparator = new TitleComparator();
@@ -114,6 +119,9 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
                 sharedViewModel.removeHistoryList(item);
             });
 
+            /*
+                호출한 fragment 에 따라서 분기 처리
+            */
             if (currentFragment.equals("history")) {
                 binding.bookItem.setOnClickListener(v -> {
                     Navigation.findNavController(v).navigate(HistoryFragmentDirections.Companion.actionHistoryFragmentToDetailFragment(item.getIsbn()));
@@ -130,7 +138,7 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
         void updateItemCount(int count);
     }
 
-    class TitleComparator implements Comparator<Book> {
+    static class TitleComparator implements Comparator<Book> {
 
         @Override
         public int compare(Book o1, Book o2) {
@@ -138,7 +146,7 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
         }
     }
 
-    class PriceComparator implements Comparator<Book> {
+    static class PriceComparator implements Comparator<Book> {
 
         @Override
         public int compare(Book o1, Book o2) {
@@ -147,7 +155,7 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
         }
     }
 
-    class IsbnComparator implements Comparator<Book> {
+    static class IsbnComparator implements Comparator<Book> {
 
         @Override
         public int compare(Book o1, Book o2) {

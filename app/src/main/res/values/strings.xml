@@ -5,4 +5,23 @@
     <string name="tab_text_3">History</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookmark_empty_msg">Bookmark list is empty.</string>
+    <string name="sort_title">Title</string>
+    <string name="sort_isbn">ISBN</string>
+    <string name="sort_price">High PRICE</string>
+    <string name="history_empty_msg">History list is empty.</string>
+    <string name="author_header_text">Author:</string>
+    <string name="publisher_header_text">Publisher:</string>
+    <string name="price_header_text">Price:</string>
+    <string name="language_header_text">Language:</string>
+    <string name="page_header_text">Total Page:</string>
+    <string name="isbn__header_text">ISBN 10 / ISBN 13:</string>
+    <string name="rating_header_text">Rating:</string>
+    <string name="url__header_text">WebSite:</string>
+    <string name="pdf_header_text">Free PDF:</string>
+    <string name="description_header_text">Description:</string>
+    <string name="memo_header_text">Memo:</string>
+    <string name="et_memo_hint">please add your note here.</string>
+    <string name="no_rationg_msg">No Rating.</string>
+    <string name="no_pdf_provided_msg">Not Provided.</string>
 </resources>

@@ -35,7 +35,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:text="Bookmark list is empty."
+        android:text="@string/bookmark_empty_msg"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:visibility="gone" />
@@ -78,19 +78,19 @@
                 android:id="@+id/rb_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:text="@string/sort_title" />
 
             <RadioButton
                 android:id="@+id/rb_isbn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ISBN" />
+                android:text="@string/sort_isbn" />
 
             <RadioButton
                 android:id="@+id/rb_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PRICE" />
+                android:text="@string/sort_price" />
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

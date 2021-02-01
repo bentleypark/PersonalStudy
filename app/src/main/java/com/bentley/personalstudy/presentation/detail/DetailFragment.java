@@ -7,7 +7,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -86,7 +85,7 @@ public class DetailFragment extends Fragment {
         if (!detail.getRating().equals("0")) {
             binding.tvRating.setText(detail.getRating());
         } else {
-            binding.tvRating.setText("No Rating.");
+            binding.tvRating.setText(R.string.no_rationg_msg);
         }
 
         binding.tvUrl.setText(Html.fromHtml(detail.getUrl()));
@@ -94,7 +93,7 @@ public class DetailFragment extends Fragment {
         if(!detail.getPdf().isEmpty()) {
             binding.tvPdf.setText(Html.fromHtml(detail.getPdf()));
         } else {
-            binding.tvPdf.setText(Html.fromHtml("Not Provided."));
+            binding.tvPdf.setText(R.string.no_pdf_provided_msg);
         }
         binding.tvContents.setText(detail.getDesc());
 
