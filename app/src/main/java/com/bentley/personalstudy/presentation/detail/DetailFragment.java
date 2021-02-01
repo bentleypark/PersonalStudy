@@ -65,7 +65,7 @@ public class DetailFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                navController.navigate(R.id.action_detailFragment_to_newFragment);
+                navController.navigate(R.id.action_detailFragment_pop);
             }
         });
     }

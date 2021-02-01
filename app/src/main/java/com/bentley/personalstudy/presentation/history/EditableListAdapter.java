@@ -4,11 +4,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bentley.personalstudy.data.model.Book;
 import com.bentley.personalstudy.databinding.ItemEditableBookBinding;
 import com.bentley.personalstudy.presentation.SharedViewModel;
+import com.bentley.personalstudy.presentation.bookmark.BookMarkFragmentDirections;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,11 +25,13 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
     private ItemEditableBookBinding binding;
     private ItemChangedListener itemChangedListener;
     private SharedViewModel sharedViewModel;
+    private String currentFragment;
 
-    public EditableListAdapter(List<Book> list, ItemChangedListener listener, SharedViewModel viewModel) {
+    public EditableListAdapter(List<Book> list, ItemChangedListener listener, SharedViewModel viewModel, String current) {
         books = list;
         itemChangedListener = listener;
         sharedViewModel = viewModel;
+        currentFragment = current;
     }
 
     @NonNull
@@ -109,6 +113,16 @@ public class EditableListAdapter extends RecyclerView.Adapter<EditableListAdapte
                 remove(item);
                 sharedViewModel.removeHistoryList(item);
             });
+
+            if (currentFragment.equals("history")) {
+                binding.bookItem.setOnClickListener(v -> {
+                    Navigation.findNavController(v).navigate(HistoryFragmentDirections.Companion.actionHistoryFragmentToDetailFragment(item.getIsbn()));
+                });
+            } else if (currentFragment.equals("bookmark")) {
+                binding.bookItem.setOnClickListener(v -> {
+                    Navigation.findNavController(v).navigate(BookMarkFragmentDirections.Companion.actionBookMarkFragmentToDetailFragment(item.getIsbn()));
+                });
+            }
         }
     }
 

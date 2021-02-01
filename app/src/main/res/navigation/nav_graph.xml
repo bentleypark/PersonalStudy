@@ -23,20 +23,38 @@
         android:id="@+id/bookMarkFragment"
         android:name="com.bentley.personalstudy.presentation.bookmark.BookMarkFragment"
         android:label="fragment_book_mark"
-        tools:layout="@layout/fragment_book_mark" />
+        tools:layout="@layout/fragment_book_mark" >
+        <action
+            android:id="@+id/action_bookMarkFragment_to_detailFragment"
+            app:destination="@id/detailFragment" >
+            <argument
+                android:name="isbn"
+                android:defaultValue=""
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.bentley.personalstudy.presentation.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_detailFragment"
+            app:destination="@id/detailFragment" >
+            <argument
+                android:name="isbn"
+                android:defaultValue=""
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.bentley.personalstudy.presentation.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <action
-            android:id="@+id/action_detailFragment_to_newFragment"
-            app:destination="@id/newFragment"
-            app:launchSingleTop="true" />
+            android:id="@+id/action_detailFragment_pop"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

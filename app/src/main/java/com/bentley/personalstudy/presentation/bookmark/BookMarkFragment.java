@@ -52,7 +52,7 @@ public class BookMarkFragment extends Fragment implements EditableListAdapter.It
 
     private void setupViews() {
         if (!mViewModel.fetchFavoriteList().isEmpty()) {
-            editableListAdapter = new EditableListAdapter(mViewModel.fetchFavoriteList(), this, mViewModel);
+            editableListAdapter = new EditableListAdapter(mViewModel.fetchFavoriteList(), this, mViewModel, "bookmark");
             editableListAdapter.sortListBy("title");
             binding.bookList.setVisibility(View.VISIBLE);
             binding.btnFilter.setVisibility(View.VISIBLE);

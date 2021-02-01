@@ -48,7 +48,7 @@ public class HistoryFragment extends Fragment implements EditableListAdapter.Ite
 
     private void setupViews() {
         if (!mViewModel.fetchHistoryList().isEmpty()) {
-            historyListAdapter = new EditableListAdapter(mViewModel.fetchHistoryList(), this, mViewModel);
+            historyListAdapter = new EditableListAdapter(mViewModel.fetchHistoryList(), this, mViewModel,"history");
             binding.bookList.setVisibility(View.VISIBLE);
             binding.tvEmpty.setVisibility(View.GONE);
         } else {
